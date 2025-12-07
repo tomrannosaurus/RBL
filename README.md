@@ -1,6 +1,6 @@
 # Retrospective Beam-Lookahead (RBL) Optimizer
 
-A novel optimizer combining multi-path beam search with gradient-based lookahead for neural network training.
+A novel optimizer combining multi-path beam search with gradient-based lookahead and retrospective self-correction for neural network training.
 
 ## Idea
 
@@ -66,13 +66,37 @@ The synthesis of:
 
 No existing optimizer combines gradient-guided multi-path exploration with discrete selection and retrospective self-correction for weight updates.
 
-## Foundational Work (Citations)
+## Related Work
 
-| Technique | Paper | What We Use |
-|-----------|-------|-------------|
-| Lookahead | Zhang et al., 2019 | $k$-step unrolling, slow/fast weights |
-| Nadam | Dozat, 2016 | Future-peeking concept |
-| Evolutionary Strategies | Salimans et al., 2017 | Multi-path exploration (but we use gradients, not noise) |
+### Core Foundations (Direct Building Blocks)
+
+| Authors | Paper | Link | Connection | How RBL Differs |
+|---------|-------|------|------------|-----------------|
+| Zhang et al., 2019 | Lookahead Optimizer | [arXiv:1907.08610](https://arxiv.org/abs/1907.08610) | $k$-step unrolling, slow/fast weights | RBL uses $B$ parallel paths with discrete selection, not single-path averaging |
+| Dozat, 2016 | Nadam | [ICLR Workshop](https://openreview.net/forum?id=OM0jvwB8jIp57ZJjtNEZ) | Future-peeking via Nesterov momentum | RBL looks $k$ steps ahead across $B$ branches, not 1-step linear extrapolation |
+| Salimans et al., 2017 | Evolution Strategies | [arXiv:1703.03864](https://arxiv.org/abs/1703.03864) | Multi-path exploration of weight space | RBL uses gradient-guided trajectories, not random noise perturbations |
+
+### Beam Search in ML (Conceptual Ancestors)
+
+| Authors | Paper | Link | Connection | How RBL Differs |
+|---------|-------|------|------------|-----------------|
+| Kool et al., 2019 | Stochastic Beam Search | [arXiv:1903.06059](https://arxiv.org/abs/1903.06059) | Gumbel-Top-k for diverse beam sampling without replacement | Applied to discrete sequence decoding; RBL applies to continuous weight optimization during training |
+| Meister et al., 2021 | Conditional Poisson Stochastic Beams | [ACL Anthology](https://aclanthology.org/2021.emnlp-main.52/) | Improved stochastic beam search with better statistical estimators | Sequence decoding for NLP; RBL optimizes neural network parameters |
+| Della Croce & T'kindt, 2002 | Recovering Beam Search | [JSTOR:822814](https://www.jstor.org/stable/822814) | **Key precedent**: beam search with recovering step that can override previous decisions | Applied to discrete scheduling; uses dominance properties, not gradient-guided continuous optimization |
+
+### Neural Combinatorial Optimization (Closest Conceptual Neighbors)
+
+| Authors | Paper | Link | Connection | How RBL Differs |
+|---------|-------|------|------------|-----------------|
+| Pirnay & Grimm, 2024 | Gumbeldore | [OpenReview](https://openreview.net/forum?id=agT8ojoH0X) | Self-improvement via SBS rounds; select best trajectory as pseudo-expert | For CO inference (TSP, CVRP); RBL is an optimizer for NN training |
+| Pirnay & Grimm, 2024 | Take a Step and Reconsider | [arXiv:2407.17206](https://arxiv.org/abs/2407.17206) | Follow best path for $s$ steps, then reconsider abandoned alternatives | Discrete sequence space for CO; RBL operates in continuous weight space with gradient unrolling |
+| Choo et al., 2022 | Simulation-guided Beam Search | [arXiv:2207.06190](https://arxiv.org/abs/2207.06190) | Neural policy + rollout simulation to guide beam search | For CO inference; RBL is a training-time optimizer |
+
+### Literature Review
+
+The "Recovering Beam Search" paper (Della Croce & T'kindt, 2002) is the closest conceptual ancestor to RBL. It introduced the idea of a beam search that can revisit and override previous decisions via a recovering step. However, it was applied to discrete scheduling problems using dominance properties.
+
+We transfer this "recovering" concept to continuous neural network optimization, using gradient-guided trajectory unrolling instead of discrete dominance checks, and applying it to the training process rather than inference/decoding.
 
 ## Current Results (Proof of Concept)
 
@@ -120,7 +144,7 @@ python rbl_optimizer_poc.py
 - [x] Test on Rastrigin (multi-modal)
 - [x] Generate comparison plots
 
-### Phase 2: Fair Comparison (Next)
+### Phase 2: Fair Comparison (*Current*)
 - [ ] Compute-matched baseline: Adam with $B \times k$ more steps
 - [ ] Tune Adam LR to match RBL's preferred branch (2x)
 - [ ] Multiple random seeds (5-10) with std dev reporting
@@ -147,4 +171,8 @@ python rbl_optimizer_poc.py
 
 ## License
 
-Apache 2.0
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use these files except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
