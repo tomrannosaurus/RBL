@@ -6,9 +6,9 @@ Canonical definitions. Check here before using terms in code, docs, or papers.
 
 | # | Short name | What it does | Novel? |
 |---|-----------|--------------|--------|
-| 1 | Branching | Spawn B clones from θ_t with different strategies, unroll k steps | **No — precedented by Lookahead (B=1), Lookaround (B>1 w/ avg)** |
-| 2 | Retrospective Branch Continuation | Continue B−1 abandoned branches from t−1 alongside fresh at t | **Yes — novel in continuous weight space** (discrete analogs: RECOVERING-BS, RECONSIDER) |
-| 3 | Discrete Selection | argmin loss across all live endpoints | Marginal — novel only combined with Stage 2; argmin alone is line/plane search |
+| 1 | Branching | Spawn B clones from θ_t with different strategies, unroll k steps | No (Lookahead B=1, Lookaround B>1 w/ avg) |
+| 2 | Retrospective Branch Continuation | Continue B−1 abandoned branches from t−1 alongside fresh at t | **Yes — load-bearing** |
+| 3 | Discrete Selection | argmin loss across all live endpoints | Marginal (argmin over k-step unrolls incl. stale) |
 | 4 | Consistency Modulation | CosSim(selected update, prev update) → λ ∈ [0.5, 1.5] | **No — subsumed by HGM** |
 
 Do not renumber. Stage 2 is not yet in the PoC (only Stages 1, 3, 4 implemented).
@@ -45,7 +45,7 @@ Never use "Stage" for a milestone or "Phase" for an algorithm component.
 - **Not novel:** Stage 1 (Lookaround, PBT); Stage 4 (HGM)
 - **Marginally novel:** Stage 3 alone (argmin vs. Lookaround's averaging, vs. line search's single-step)
 
-Never claim Stage 1 or Stage 4 as novel. Always note Lookaround/PBT precedence for Stage 1 and HGM precedence for Stage 4.
+Never claim Stage 4 as novel. Always note HGM precedence when describing it.
 
 ## Preferred terms
 
