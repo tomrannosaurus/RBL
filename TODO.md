@@ -6,6 +6,11 @@ Tracks work picked up after the December PoC. Granular companion to the high-lev
 
 ## 0. Novelty Gate (do this first)
 
+**Status (2026-05-02): first pass complete.** See `docs/novelty_review.md` for the full review. Verdict: **proceed with narrowed contribution.** Stage 4 (cosine-similarity modulation) is subsumed by HGM (arXiv:2506.22479) and must be dropped or re-attributed. Lookaround (NeurIPS 2023) is a closer ancestor than the README acknowledges and must be added as a baseline. The retrospective-branch-continuation mechanic in continuous weight space appears to be the load-bearing novel contribution. Before §1, do the README revisions listed in `docs/novelty_review.md` §4.
+
+### Original plan (kept for reference):
+
+
 **Goal:** Before spending more engineering effort, confirm RBL — *gradient-guided multi-path unrolling with discrete endpoint selection AND continuation of abandoned branches across optimizer steps* — is not already published. Output is a written verdict: **proceed / pivot / abandon**.
 
 The existing `README.md` "Related Work" table is a starting point, not a literature review. It was written from memory and from the references that motivated the design; it has not been stress-tested against an adversarial search.
