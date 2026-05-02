@@ -205,3 +205,62 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# macOS
+.DS_Store
+
+# Overleaf/TeX Build Artifacts
+*.aux
+*.bbl
+*.bcf
+*.fdb_latexmk
+*.fls
+*.ind
+*.idx
+*.lof
+*.lot
+*.out
+*.toc
+*.synctex.gz
+*.log
+
+# Compiled PDFs
+*.pdf
+
+# Keep references folder structure (paper directories end with .pdf)
+!references/**/*.pdf/
+references/**/*.pdf/*
+!references/**/*.pdf/.gitkeep
+!references/**/*.pdf/*.md
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Editor/IDE Files
+.vscode/**
+.vscode/
+*.swp
+*.swo
+*~
+*.elc
+
+# BibTeX/BibLaTeX cache
+*.bbl
+*.blg
+
+# Agents
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.claude/
+.gemini/
+
+# Redacted files
+.redacted/
+
+# Ignore all hidden folders
+.*/
