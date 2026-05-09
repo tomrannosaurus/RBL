@@ -29,3 +29,16 @@ Full papers not read end-to-end (especially LOOKAROUND, HGM algorithm sections).
 ## 2026-05-02 — File restructuring
 
 Established current-truth / lab-notebook / changelog convention. Extracted all historical content from current-truth files into NOTES.md. Compressed all current-truth files to contain only present understanding.
+
+## 2026-05-04 — Temp literature queue
+
+Imported `temp_notes_20260504.txt`. It flagged a discrete beam-search / neural-combinatorial-optimization queue that needed checking against the repo corpus:
+
+- `SIM-BS`: Simulation-guided Beam Search for Neural Combinatorial Optimization
+- `GUMBELDORE`: Self-Improvement for Neural Combinatorial Optimization: Sample Without Replacement, but Improvement
+- `RECONSIDER`: Take a Step and Reconsider: Sequence Decoding for Self-Improved Neural Combinatorial Optimization
+- `SBS`: Stochastic Beams and Where To Find Them: The Gumbel-Top-k Trick for Sampling Sequences Without Replacement
+- Gumbeldore and SBS code repositories
+- Beam Search wiki background
+
+Initial triage: all items are now represented in `docs/references.md`. The paper/code items belong to discrete beam-search, sampling-without-replacement, or NCO context rather than direct optimizer threats unless full reads reveal continuous weight-space branch retention. The Beam Search wiki belongs only as background and should not be used as novelty evidence.

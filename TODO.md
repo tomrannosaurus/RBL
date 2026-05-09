@@ -11,6 +11,7 @@ Complete. Verdict in `docs/novelty_review.md`.
 - [ ] **Implement Stage 2** in `rbl_optimizer_poc.py` — abandoned-branch tracking, branches not selected at t−1 continued at t. Core novelty, currently missing.
 - [ ] **Decide on Stage 4** — keep (cite HGM) or drop. Cannot claim as novel.
 - [ ] **Align PoC code labels** with `docs/terminology.md`.
+- [ ] **Resolve discrete beam-search follow-up reads** — full-read `SBS`, `GUMBELDORE`, `SIM-BS`, and `RECONSIDER`; confirm they remain background/conceptual ancestors or update verdicts in `docs/references.md`.
 
 ## 1. Strengthen the PoC
 
